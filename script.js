@@ -33,12 +33,20 @@ function addC() {
 
 // Remove a row
 function removeR() {
-    alert("Clicked Remove Row"); // Replace this line with your code.
+    // Remove the last row in the table
+    tBody.deleteRow(-1);
+    // Decrement the number of rows
+    numRows--;
 }
 
 // Remove a column
 function removeC() {
-    alert("Clicked Remove Col"); // Replace this line with your code.
+    // Remove the last <td> in each row
+    for (const i of tBody.rows) {
+        i.deleteCell(-1);
+    }
+    // Decrement the number of columns
+    numCols--;
 }
 
 // Set global variable for selected color
