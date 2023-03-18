@@ -2,8 +2,11 @@
 let numRows = 0;
 let numCols = 0;
 
-//selected color
-let colorSelected;
+//Color Picker element
+let colorPicker = document.getElementById("exampleColorInput");
+
+//select color
+let selectedColor = colorPicker.value;
 
 // table body element
 let tBody = document.getElementById("table_body");
@@ -50,10 +53,11 @@ function removeC() {
 }
 
 // Set global variable for selected color
-function selectColor() {
-    colorSelected = document.getElementById("selectedColorId").value;
-    console.log(colorSelected);
-}
+colorPicker.addEventListener('change', () => {
+    // Get the selected color value
+    selectedColor = colorPicker.value;
+    console.log(selectedColor); // Log the selected color value
+});
 
 // Fill all uncolored cells
 function fillU() {
