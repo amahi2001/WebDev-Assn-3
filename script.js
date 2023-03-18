@@ -33,7 +33,10 @@ function addC() {
 
 // Remove a row
 function removeR() {
-    alert("Clicked Remove Row"); // Replace this line with your code.
+    // Remove the last row in the table
+    tBody.deleteRow(-1);
+    // Decrement the number of rows
+    numRows--;
 }
 
 // Remove a column
