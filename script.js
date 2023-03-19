@@ -2,8 +2,11 @@
 let numRows = 0;
 let numCols = 0;
 
-//selected color
-let colorSelected;
+//Color Picker element
+let colorPicker = document.getElementById("exampleColorInput");
+
+//select color
+let selectedColor = colorPicker.value;
 
 // table body element
 let tBody = document.getElementById("table_body");
@@ -12,23 +15,37 @@ let tBody = document.getElementById("table_body");
 function addR() {
     // Create a new row at the end of the table
     let newRow = tBody.insertRow(-1);
-    // Create a new <td> for num cols - 1 in the row
-    for (let i = 0; i < numCols - 1; i++) {
-        newRow.insertCell(-1);
-    }
-    newRow.insertCell(-1)
     // Increment the number of rows
     numRows++;
+    //! Create a new <td> for numCols if numCols > 0
+    if (numCols > 0) {
+        for (let i = 0; i < numCols + 1; i++) {
+            newRow.insertCell(-1);
+            //give the cell a onclick function to set the background color
+            givOnclickToCell(newRow.cells[i]);
+        }
+    }
+    else {
+        // Create a new <td> at the end of the row
+        newRow.insertCell(-1);
+        //give the cell a onclick function to set the background color
+        givOnclickToCell(newRow.cells[0]);
+    }
 }
 
 // Add a column
 function addC() {
-    // Create a new <td> at end of row for each row in table
-    for (const i of tBody.rows) {
-        i.insertCell(-1);
+    if (numRows > 0) {
+        // Create a new <td> at end of row for each row in table
+        for (const i of tBody.rows) {
+            i.insertCell(-1);
+            //give the cell a onclick function to set the background color
+            givOnclickToCell(i.cells[numCols + 1]);
+        }
+        // Increment the number of columns
+        numCols++;
     }
-    // Increment the number of columns
-    numCols++;
+
 }
 
 // Remove a row
@@ -50,22 +67,43 @@ function removeC() {
 }
 
 // Set global variable for selected color
-function selectColor() {
-    colorSelected = document.getElementById("selectedColorId").value;
-    console.log(colorSelected);
+colorPicker.addEventListener('change', () => {
+    // Get the selected color value
+    selectedColor = colorPicker.value;
+});
+
+//gives the cell a onclick function to set the background color
+function givOnclickToCell(cell) {
+    cell.onclick = function () {
+        cell.style.backgroundColor = selectedColor;
+    }
 }
 
 // Fill all uncolored cells
 function fillU() {
-    alert("Clicked Fill All Uncolored"); // Replace this line with your code.
+    for (const i of tBody.rows) {
+        for (const j of i.cells) {
+            if (j.style.backgroundColor == "") {
+                j.style.backgroundColor = selectedColor;
+            }
+        }
+    }
 }
 
 // Fill all cells
 function fillAll() {
-    alert("Clicked Fill All"); // Replace this line with your code.
+    for (const i of tBody.rows) {
+        for (const j of i.cells) {
+            j.style.backgroundColor = selectedColor;
+        }
+    }
 }
 
 // Clear all cells
 function clearAll() {
-    alert("Clicked Clear All"); // Replace this line with your code.
+    for (const i of tBody.rows) {
+        for (const j of i.cells) {
+            j.style.backgroundColor = "";
+        }
+    }
 }
