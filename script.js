@@ -101,5 +101,9 @@ function fillAll() {
 
 // Clear all cells
 function clearAll() {
-    alert("Clicked Clear All"); // Replace this line with your code.
+    for (const i of tBody.rows) {
+        for (const j of i.cells) {
+            j.style.backgroundColor = "";
+        }
+    }
 }
