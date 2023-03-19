@@ -81,7 +81,13 @@ function fillCellOnClick(cell) {
 
 // Fill all uncolored cells
 function fillU() {
-    alert("Clicked Fill All Uncolored"); // Replace this line with your code.
+    for (const i of tBody.rows) {
+        for (const j of i.cells) {
+            if (j.style.backgroundColor == "") {
+                j.style.backgroundColor = selectedColor;
+            }
+        }
+    }
 }
 
 // Fill all cells
