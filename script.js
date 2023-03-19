@@ -22,14 +22,14 @@ function addR() {
         for (let i = 0; i < numCols + 1; i++) {
             newRow.insertCell(-1);
             //give the cell a onclick function to set the background color
-            fillCellOnClick(newRow.cells[i]);
+            givOnclickToCell(newRow.cells[i]);
         }
     }
     else {
         // Create a new <td> at the end of the row
         newRow.insertCell(-1);
         //give the cell a onclick function to set the background color
-        fillCellOnClick(newRow.cells[0]);
+        givOnclickToCell(newRow.cells[0]);
     }
 }
 
@@ -40,7 +40,7 @@ function addC() {
         for (const i of tBody.rows) {
             i.insertCell(-1);
             //give the cell a onclick function to set the background color
-            fillCellOnClick(i.cells[numCols + 1]);
+            givOnclickToCell(i.cells[numCols + 1]);
         }
         // Increment the number of columns
         numCols++;
@@ -73,7 +73,7 @@ colorPicker.addEventListener('change', () => {
 });
 
 //gives the cell a onclick function to set the background color
-function fillCellOnClick(cell) {
+function givOnclickToCell(cell) {
     cell.onclick = function () {
         cell.style.backgroundColor = selectedColor;
     }
@@ -92,7 +92,11 @@ function fillU() {
 
 // Fill all cells
 function fillAll() {
-    alert("Clicked Fill All"); // Replace this line with your code.
+    for (const i of tBody.rows) {
+        for (const j of i.cells) {
+            j.style.backgroundColor = selectedColor;
+        }
+    }
 }
 
 // Clear all cells
